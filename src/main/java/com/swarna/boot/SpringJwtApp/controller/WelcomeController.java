@@ -19,19 +19,21 @@ public class WelcomeController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	@GetMapping("/")
+	@GetMapping("/login")
 	public String welcome() {
 		return "You are Authenticated !!!";
 	}
 
 	@PostMapping("/authenticate")
-	public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
+	public String generateToken(@RequestBody AuthRequest authenticationRequest) throws Exception {
 		try {
 			authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+					new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 
+		} catch (InvalidAuthenticationException e){
+			throw new Exception("Anyone of Username / password is wrong");
 		} catch (Exception e) {
-			throw new Exception("Invalid Username / password");
+			throw new Exception("Invalid Username or password");
 		}
 
 		return jwtUtil.generateToken(authRequest.getUsername());
