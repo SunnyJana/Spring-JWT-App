@@ -5,6 +5,6 @@ import com.swarna.boot.SpringJwtApp.model.CustomUser;
 
 public interface UserRepo extends JpaRepository<CustomUser, Integer> {
 
-	CustomUser findByUsername(String username);
+	Optional<CustomUser> findByUsername(String username);
 
 }
