@@ -19,7 +19,7 @@ public class WelcomeController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	@GetMapping("/login")
+	@GetMapping("/login/open")
 	public String welcome() {
 		return "You are Authenticated !!!";
 	}
