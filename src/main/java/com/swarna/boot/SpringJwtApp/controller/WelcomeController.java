@@ -19,9 +19,9 @@ public class WelcomeController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	@GetMapping("/login/open")
+	@GetMapping("/login")
 	public String welcome() {
-		return "You are Authenticated !!!";
+		return "Welcome user, you are authenticated!!!";
 	}
 
 	@PostMapping("/authenticate")
@@ -31,7 +31,7 @@ public class WelcomeController {
 					new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 
 		} catch (InvalidAuthenticationException e){
-			throw new Exception("Anyone of Username / password is wrong");
+			throw new Exception("Any of Username / password is wrong");
 		} catch (Exception e) {
 			throw new Exception("Invalid Username or password");
 		}
